@@ -11,3 +11,33 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
+import React, { useEffect, useRef, useState } from 'react';
+
+export default function Ambience() {
+  const audioRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.35;
+    audio.loop = true;
+
+    if (playing) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  }, [playing]);
+
+  return (
+    <div className="nw-ambience-toggle">
+      <button onClick={() => setPlaying(!playing)}>
+        {playing ? 'Pause Ambience' : 'Play Ambience'}
+      </button>
+
+      <audio ref={audioRef} src="/ambience.mp3" />
+    </div>
+  );
+}

@@ -1,4 +1,10 @@
-self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('install', () => {
+  self.skipWaiting();
+});
+
+self.addEventListener('fetch', () => {
+  // keep simple for now; you can add caching later
+});self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', () => clients.claim());public/service-worker.js
 public/ambience.mp3
 {
